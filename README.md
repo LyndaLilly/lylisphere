@@ -53,7 +53,7 @@ Ensure your server environment supports PHP and has the necessary extensions ins
 Set up an Apache or Nginx server to serve the application.
 Run the Application:
 
-Access the application through your local server (e.g., http://localhost/lylisphere-blog).
+Access the application through your local server (e.g., http://localhost/lylisphere).
 Usage
 Access the Blog: Navigate to the homepage to view recent posts.
 Create an Account: Register for a new account to start creating posts and interacting with content.
