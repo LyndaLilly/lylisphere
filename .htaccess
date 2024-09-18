@@ -1,0 +1,12 @@
+Options -Indexes
+
+RewriteEngine On
+
+# Exclude ajax.php from the rewrite rules
+RewriteCond %{REQUEST_URI} !^/ajax.php$
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond $1 !^(config|core|css|js|fonts|robots\.txt)
+
+RewriteRule ^(.+)$ index.php/$1 [L]
