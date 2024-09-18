@@ -4,245 +4,279 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LYLISPHERE Blog</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        *{
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #fce4ec;
-            color: #333;
-        }
+        /* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        /* Header & Navbar */
-        .navbar {
-            background-color: #ec407a;
-        }
+/* Body Styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f4f1; /* Very light green background */
+    color: #333;
+}
 
-        .navbar-brand {
-            color: #fff !important;
-            font-size: 24px;
-            font-weight: bold;
-        }
+/* Header & Navbar */
+.navbar {
+    background-color: #004d40; /* Deep teal */
+}
 
-        .navbar-nav .nav-link {
-            color: #fff !important;
-            margin-right: 20px;
-        }
+.navbar-brand {
+    color: #ffffff !important;
+    font-size: 24px;
+    font-weight: bold;
+}
 
-        .navbar-nav .nav-link:hover {
-            color: #f8bbd0 !important;
-        }
+.navbar-nav .nav-link {
+    color: #ffffff !important;
+    margin-right: 20px;
+}
 
-        /* Hero Section */
-        .hero-section {
-            background-color: #f48fb1;
-            padding: 80px 0;
-            text-align: center;
-            color: white;
-        }
+.navbar-nav .nav-link:hover {
+    color: #a7ffeb !important; /* Light teal on hover */
+}
 
-        .hero-section h1 {
-            font-size: 48px;
-            font-weight: bold;
-        }
+/* Hero Section */
+.hero-section {
+    background-color: #00796b; /* Teal */
+    padding: 80px 0;
+    text-align: center;
+    color: white;
+}
 
-        .hero-section p {
-            font-size: 20px;
-            margin-top: 15px;
-        }
+.hero-section h1 {
+    font-size: 48px;
+    font-weight: bold;
+}
 
-        /* Blog Grid */
-        .blog-section {
-            padding: 50px 0;
-            background-color: #fff;
-        }
+.hero-section p {
+    font-size: 20px;
+    margin-top: 15px;
+}
 
-        .blog-title {
-            text-align: center;
-            margin-bottom: 40px;
-            color: #ad1457;
-        }
+/* Blog Section */
+.blog-section {
+    padding: 50px 0;
+    background-color: #ffffff; /* White for contrast */
+}
 
-        .divs {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
-            gap: 30px;
-            padding: 0 50px;
-        }
+.blog-title {
+    text-align: center;
+    margin-bottom: 40px;
+    color: #004d40; /* Deep teal */
+}
 
-        .cards {
-            background-color: #ffffff;
-            border: 1px solid #f8bbd0;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            transition: transform 0.3s ease;
-        }
+.divs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
+    gap: 30px;
+    padding: 0 50px;
+}
 
-        .cards:hover {
-            transform: translateY(-5px); /* Hover effect */
-        }
+.cards {
+    background-color: #ffffff;
+    border: 1px solid #004d40; /* Deep teal */
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
 
-        .cards img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
+.cards:hover {
+    transform: translateY(-5px); /* Hover effect */
+}
 
-        .card-body {
-            padding: 20px;
-        }
+.cards img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
 
-        .cards h4 {
-            color: #880e4f;
-        }
+.card-body {
+    padding: 20px;
+}
 
-        .cards p {
-            font-size: 14px;
-            text-align: justify;
-            color: #333;
-        }
+.cards h4 {
+    color: #004d40; /* Deep teal */
+}
 
-        /* Sidebar: Categories & Latest Posts */
-        .sidebar {
-            background-color: #f8bbd0;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 30px;
-        }
+.cards p {
+    font-size: 14px;
+    text-align: justify;
+    color: #333;
+}
 
-        .sidebar h4 {
-            color: #880e4f;
-            font-weight: bold;
-        }
+/* Sidebar: Categories & Latest Posts */
+.sidebar {
+    background-color: #a5d6a7; /* Light green */
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+}
 
-        .sidebar ul {
-            list-style: none;
-            padding: 0;
-        }
+.sidebar h4 {
+    color: #004d40; /* Deep teal */
+    font-weight: bold;
+}
 
-        .sidebar ul li {
-            margin: 10px 0;
-        }
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
 
-        .sidebar ul li a {
-            color: #333;
-            text-decoration: none;
-        }
+.sidebar ul li {
+    margin: 10px 0;
+}
 
-        .sidebar ul li a:hover {
-            color: #880e4f;
-        }
+.sidebar ul li a {
+    color: #004d40; /* Deep teal */
+    text-decoration: none;
+}
 
-        /* Related Posts */
-        .related-posts-section {
-            padding: 50px 0;
-            background-color: #fce4ec;
-        }
+.sidebar ul li a:hover {
+    color: #00796b; /* Teal on hover */
+}
 
-        .related-posts-title {
-            text-align: center;
-            color: #880e4f;
-            margin-bottom: 30px;
-        }
+/* Related Posts */
+.related-posts-section {
+    padding: 50px 0;
+    background-color: #e0f2f1; /* Light green */
+}
 
-        .related-posts {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive grid */
-            gap: 20px;
-        }
+.related-posts-title {
+    text-align: center;
+    color: #004d40; /* Deep teal */
+    margin-bottom: 30px;
+}
 
-        .related-post {
-            background-color: #ffffff;
-            border: 1px solid #f8bbd0;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            padding: 15px;
-            text-align: center;
-            transition: transform 0.3s ease;
-        }
+.related-posts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive grid */
+    gap: 20px;
+}
 
-        .related-post:hover {
-            transform: translateY(-5px);
-        }
+.related-post {
+    background-color: #ffffff;
+    border: 1px solid #004d40; /* Deep teal */
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    padding: 15px;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
 
-        .related-post img {
-            width: 100%;
-            height: 150px;
-            object-fit: cover;
-            margin-bottom: 10px;
-        }
+.related-post:hover {
+    transform: translateY(-5px);
+}
 
-        .related-post h5 {
-            color: #880e4f;
-            font-size: 16px;
-        }
+.related-post img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
 
-        /* Footer */
-        footer {
-            background-color: #ec407a;
-            color: white;
-            padding: 40px 0;
-            text-align: center;
-        }
+.related-post h5 {
+    color: #004d40; /* Deep teal */
+    font-size: 16px;
+}
 
-        footer a {
-            color: #f8bbd0;
-            margin: 0 10px;
-        }
+/* Footer */
+footer {
+    background-color: #004d40; /* Deep teal */
+    color: white;
+    padding: 40px 0;
+    text-align: center;
+}
 
-        footer a:hover {
-            color: #fff;
-        }
+footer a {
+    color: #a7ffeb; /* Light teal */
+    margin: 0 10px;
+}
 
-        /* Loader Styles */
-        #loader {
-            position: fixed;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.9); /* Slightly more opaque */
-            z-index: 9999;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: opacity 0.5s ease, visibility 0.5s ease;
-        }
+footer a:hover {
+    color: #ffffff; /* White on hover */
+}
 
-        #loader.hidden {
-            opacity: 0;
-            visibility: hidden;
-        }
+/* Loader Styles */
+#loader {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.9); /* Slightly more opaque */
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
 
-        #loader img {
-            width: 80px;
-            height: 80px;
-            animation: spin 1s linear infinite;
-        }
+#loader.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
 
-        /* Keyframes for spinning effect */
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
+#loader img {
+    width: 80px;
+    height: 80px;
+    animation: spin 1s linear infinite;
+}
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .divs {
-                grid-template-columns: 1fr;
-                padding: 0 20px;
-            }
+/* Keyframes for spinning effect */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
 
-            .related-posts {
-                grid-template-columns: 1fr;
-            }
-        }
+/* Responsive Design */
+@media (max-width: 768px) {
+    .divs {
+        grid-template-columns: 1fr;
+        padding: 0 20px;
+    }
+
+    .related-posts {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-section h1 {
+        font-size: 36px;
+    }
+
+    .hero-section p {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 576px) {
+    .navbar-nav .nav-link {
+        margin-right: 10px;
+    }
+
+    .cards img {
+        height: 150px;
+    }
+
+    .card-body {
+        padding: 15px;
+    }
+
+    .related-post img {
+        height: 120px;
+    }
+
+    footer {
+        padding: 20px 0;
+    }
+}
+
     </style>
 </head>
 <body>
@@ -254,7 +288,6 @@
 
 <!-- Navbar -->
 <?php require APP_ROOT . '/view/partials/nav.php'?>
-
 
 <!-- Hero Section -->
 <div class="hero-section">
@@ -278,7 +311,7 @@
                         <a href="blog-details?title=<?=str_replace(' ', '_',$post['title'])?>" class="btn btn-primary">Read more</a>
 
                         <!-- Like and Comment Section -->
-                        <div class="like-comment-section">
+                        <div class="like-comment-section mt-3">
                             <form method="POST">
                                 <input type="hidden" name="post_id" value="<?=$post['id']?>">
                                 <?php if ($post['user_liked']): ?>
@@ -287,7 +320,7 @@
                                     <button type="submit" name="like_post" class="btn btn-outline-primary">Like</button>
                                 <?php endif; ?>
                             </form>
-                            <span><?=$post['like_count']?> Likes</span>
+                            <span class="ms-2"><?=$post['like_count']?> Likes</span>
                         </div>
 
                         <!-- Comments Section -->
@@ -318,12 +351,10 @@
             <div class="sidebar">
                 <h4>Categories</h4>
                 <ul>
-                    
                     <li><a href="#">Finance</a></li>
-                    <li><a href="#">Finance</a></li>
-                    <li><a href="#">Finance</a></li>
-                    <li><a href="#">Finance</a></li>
-                 
+                    <li><a href="#">Tech</a></li>
+                    <li><a href="#">Lifestyle</a></li>
+                    <li><a href="#">Health</a></li>
                 </ul>
             </div>
 
@@ -331,12 +362,10 @@
             <div class="sidebar">
                 <h4>Latest Posts</h4>
                 <ul>
-                    
-                    <li><a href="#">Cultism</a></li>
-                    <li><a href="#">Cultism</a></li>
-                    <li><a href="#">Cultism</a></li>
-                    <li><a href="#">Cultism</a></li>
-               
+                    <li><a href="#">Post Title 1</a></li>
+                    <li><a href="#">Post Title 2</a></li>
+                    <li><a href="#">Post Title 3</a></li>
+                    <li><a href="#">Post Title 4</a></li>
                 </ul>
             </div>
         </div>
@@ -345,17 +374,16 @@
 
 <!-- Related Posts Section -->
 <div class="related-posts-section">
-    <h2 class="related-posts-title">Related Posts</h2>
+    <h2 class="related-posts-title">Related Post</h2>
     <div class="container">
-        <div class="related-posts">
-            <div class="related-post">
-                <img src="" alt="Related Post Image" />
-                <h5>Hello</h5>
-                <a href="blog-details?title=<?=str_replace(' ', '_',$related['title'])?>" class="btn btn-outline-primary">Read more</a>
-            </div>
+        <div class="related-post">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSW56loU4cr3HNSp4tb2mOEJBgEKRwMeYUqJDsmkWsMvgGin1JY6LyZR4MyScVv1i3ASas&usqp=CAU" alt="Related Post Image" />
+            <h5>Exploring Tech Innovations</h5>
+            <a href="blog-details?title=Exploring_Tech_Innovations" class="btn btn-outline-primary">Read more</a>
         </div>
     </div>
 </div>
+
 
 <!-- Footer -->
 <footer>
@@ -372,15 +400,12 @@
 <script>
     window.addEventListener('load', () => {
         const loader = document.getElementById('loader');
-        const content = document.querySelector('.content');
         setTimeout(() => {
             loader.classList.add('hidden');
-            content.style.display = 'block';
-            document.body.style.overflow = 'auto';
         }, 1000);
     });
 </script>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

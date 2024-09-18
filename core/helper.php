@@ -53,7 +53,7 @@ function toJson($res){
 function fileUpload($upload){
     $target_dir = 'uploads/';
     $allowed_size = 1000000; //1mb
-    $allowed_type = Array('jpg','jpeg','png','gif', 'webp');
+    $allowed_type = Array('jpg','jpeg','png','gif','webp');
     $error = [];
     
     if(!is_dir($target_dir)){
