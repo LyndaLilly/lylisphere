@@ -75,6 +75,10 @@
                     <button type="submit" class="btn btn-primary btn-lg">Register</button>
                   </div>
 
+                  <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                    <button type="button" class="btn btn-dark btn-md">have an account?<a href="auth-login">Login here</a></button>
+                  </div>
+
 
 
                 </form>

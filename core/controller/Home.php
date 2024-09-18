@@ -22,6 +22,10 @@ if (!empty($loggedInUserId)) {
 // Fetch published posts and related comments and likes
 $posts = $pdo->select("SELECT posts.*, user_blog.username FROM posts JOIN user_blog ON posts.author = user_blog.id WHERE posts.publish = ?", [1])->fetchAll(PDO::FETCH_ASSOC);
 
+if (file_exists('public/txt/category.txt')) {
+    $cat = explode(',', trim(file_get_contents('public/txt/category.txt'), ' '));
+}
+
 // Debug: Check the fetched posts
 error_log("Fetched Posts: " . print_r($posts, true));
 
@@ -59,14 +63,15 @@ if (isset($_POST['add_comment']) && $isLoggedIn) {
     }
 }
 
-// Handle like submission (toggle like/unlike)
+
+// Handle like/unlike submission (toggle like/unlike)
 if (isset($_POST['like_post'])) {
     $postId = sanitize($_POST['post_id']);
-
+    
     if ($isLoggedIn) {
         $userId = $currentUser['id'];
 
-        // Check if the user already liked the post
+        // Check if the user has already liked the post
         $existingLike = $pdo->select("SELECT * FROM likes WHERE post_id = ? AND user_id = ?", [$postId, $userId])->fetch(PDO::FETCH_ASSOC);
 
         if ($existingLike) {
@@ -96,6 +101,28 @@ if (isset($_POST['like_post'])) {
         }
     }
 }
+
+// Fetch published posts and related comments and likes
+$posts = $pdo->select("SELECT posts.*, user_blog.username FROM posts JOIN user_blog ON posts.author = user_blog.id WHERE posts.publish = ?", [1])->fetchAll(PDO::FETCH_ASSOC);
+
+foreach ($posts as &$post) {
+    // Fetch comments for each post
+    $post['comments'] = $pdo->select("SELECT c.comment, u.username, c.created_at FROM comments c JOIN user_blog u ON c.user_id = u.id WHERE c.post_id = ?", [$post['id']])->fetchAll(PDO::FETCH_ASSOC);
+    
+    // Fetch like count for each post
+    $post['like_count'] = $pdo->select("SELECT COUNT(*) as total_likes FROM likes WHERE post_id = ?", [$post['id']])->fetch(PDO::FETCH_ASSOC)['total_likes'];
+    
+    // Check if the current user liked the post (if logged in)
+    if ($isLoggedIn) {
+        $post['user_liked'] = $pdo->select("SELECT * FROM likes WHERE post_id = ? AND user_id = ?", [$post['id'], $currentUser['id']])->fetch(PDO::FETCH_ASSOC) ? true : false;
+    } else {
+        // Check if the IP address liked the post (if not logged in)
+        $userIp = $_SERVER['REMOTE_ADDR'];
+        $post['user_liked'] = $pdo->select("SELECT * FROM likes WHERE post_id = ? AND user_ip = ?", [$post['id'], $userIp])->fetch(PDO::FETCH_ASSOC) ? true : false;
+    }
+}
+unset($post);
+
 
 // // Pass the post data as JSON to the view
 // $postsJson = toJson($posts);

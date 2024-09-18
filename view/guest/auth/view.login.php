@@ -51,6 +51,9 @@
                     <button type="submit" class="btn btn-primary btn-lg">Login</button>
                   </div>
 
+                  <div class="mx-4 mb-3 mb-lg-4">
+                    <button type="button" class="btn btn-dark btn-md">don't have an account?<a href="auth-register">Register here</a></button>
+                  </div>
                   <a href="forgot-password">reset password</a>
 
 

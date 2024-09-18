@@ -4,280 +4,411 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LYLISPHERE Blog</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    
     <style>
-        /* Basic Reset */
-* {
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+/* Base Styles */
+body {
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-}
-
-/* Body Styling */
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f0f4f1; /* Very light green background */
+    background-color: #f4f4f4;
     color: #333;
 }
 
-/* Header & Navbar */
-.navbar {
-    background-color: #004d40; /* Deep teal */
+/* Loader */
+#loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+#loader img {
+    width: 100px;
 }
 
-.navbar-brand {
-    color: #ffffff !important;
-    font-size: 24px;
-    font-weight: bold;
+/* Navbar */
+nav {
+    background-color: #2c3e50;
+    color: white;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
-
-.navbar-nav .nav-link {
-    color: #ffffff !important;
-    margin-right: 20px;
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
 }
-
-.navbar-nav .nav-link:hover {
-    color: #a7ffeb !important; /* Light teal on hover */
+nav a:hover {
+    text-decoration: underline;
 }
 
 /* Hero Section */
 .hero-section {
-    background-color: #00796b; /* Teal */
-    padding: 80px 0;
-    text-align: center;
+    background: linear-gradient(to right, #1abc9c, #16a085);
     color: white;
-}
-
-.hero-section h1 {
-    font-size: 48px;
-    font-weight: bold;
-}
-
-.hero-section p {
-    font-size: 20px;
-    margin-top: 15px;
-}
-
-/* Blog Section */
-.blog-section {
-    padding: 50px 0;
-    background-color: #ffffff; /* White for contrast */
-}
-
-.blog-title {
     text-align: center;
-    margin-bottom: 40px;
-    color: #004d40; /* Deep teal */
+    padding: 50px 20px;
+    position: relative;
+}
+.hero-section h1 {
+    font-size: 3rem;
+    margin: 0;
+}
+.hero-section p {
+    font-size: 1.5rem;
+    margin: 10px 0;
+}
+.slide-in {
+    animation: slideIn 1s ease-out;
+}
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-.divs {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
-    gap: 30px;
-    padding: 0 50px;
+/* Container */
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 20px;
 }
-
+.blog-section {
+    flex: 3;
+    margin-right: 20px;
+}
+.blog-section .content-grid {
+    display: flex;
+    flex-direction: column;
+}
 .cards {
-    background-color: #ffffff;
-    border: 1px solid #004d40; /* Deep teal */
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
     overflow: hidden;
-    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
 }
-
-.cards:hover {
-    transform: translateY(-5px); /* Hover effect */
-}
-
 .cards img {
     width: 100%;
     height: 200px;
     object-fit: cover;
 }
-
 .card-body {
-    padding: 20px;
+    padding: 15px;
+}
+.card-body h4 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+.card-body p {
+    margin: 10px 0;
+    text-align:justify;
+}
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s;
+}
+.btn-outline-primary {
+    background: transparent;
+    border: 2px solid #3498db;
+    color: #3498db;
+}
+.btn-outline-primary:hover {
+    background: #3498db;
+    color: white;
+}
+.btn-danger {
+    background: #e74c3c;
+    color: white;
+}
+.btn-danger:hover {
+    background: #c0392b;
 }
 
-.cards h4 {
-    color: #004d40; /* Deep teal */
-}
-
-.cards p {
-    font-size: 14px;
-    text-align: justify;
-    color: #333;
-}
-
-/* Sidebar: Categories & Latest Posts */
-.sidebar {
-    background-color: #a5d6a7; /* Light green */
-    padding: 20px;
+/* Sidebar */
+aside {
+    flex: 1;
+    padding: 15px;
+    background: #ecf0f1;
     border-radius: 8px;
-    margin-bottom: 30px;
 }
-
+.sidebar {
+    margin-bottom: 20px;
+}
 .sidebar h4 {
-    color: #004d40; /* Deep teal */
-    font-weight: bold;
+    margin: 0;
+    font-size: 1.2rem;
 }
-
 .sidebar ul {
     list-style: none;
     padding: 0;
 }
-
 .sidebar ul li {
-    margin: 10px 0;
+    margin-bottom: 10px;
 }
-
 .sidebar ul li a {
-    color: #004d40; /* Deep teal */
     text-decoration: none;
+    color: #3498db;
 }
-
 .sidebar ul li a:hover {
-    color: #00796b; /* Teal on hover */
+    text-decoration: underline;
 }
-
-/* Related Posts */
 .related-posts-section {
-    padding: 50px 0;
-    background-color: #e0f2f1; /* Light green */
+    margin-top: 20px;
 }
-
 .related-posts-title {
-    text-align: center;
-    color: #004d40; /* Deep teal */
-    margin-bottom: 30px;
+    font-size: 1.5rem;
+    margin-bottom: 15px;
 }
-
 .related-posts {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive grid */
-    gap: 20px;
+    display: flex;
+    flex-direction: column;
 }
-
 .related-post {
-    background-color: #ffffff;
-    border: 1px solid #004d40; /* Deep teal */
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 15px;
     padding: 15px;
-    text-align: center;
-    transition: transform 0.3s ease;
 }
-
-.related-post:hover {
-    transform: translateY(-5px);
-}
-
 .related-post img {
     width: 100%;
     height: 150px;
     object-fit: cover;
-    margin-bottom: 10px;
 }
-
 .related-post h5 {
-    color: #004d40; /* Deep teal */
-    font-size: 16px;
+    margin: 10px 0;
+}
+.related-post a {
+    text-decoration: none;
+    color: #3498db;
+}
+.related-post a:hover {
+    text-decoration: underline;
 }
 
 /* Footer */
 footer {
-    background-color: #004d40; /* Deep teal */
+    background-color: #2c3e50;
     color: white;
-    padding: 40px 0;
     text-align: center;
+    padding: 20px;
+  
 }
 
+.cont{
+    display:flex;
+    flex-direction:column;
+}
 footer a {
-    color: #a7ffeb; /* Light teal */
-    margin: 0 10px;
+    color: #3498db;
+    text-decoration: none;
 }
-
 footer a:hover {
-    color: #ffffff; /* White on hover */
+    text-decoration: underline;
 }
 
-/* Loader Styles */
-#loader {
-    position: fixed;
-    left: 0;
-    top: 0;
+/* Slider */
+.slider {
+    position: relative;
     width: 100%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.9); /* Slightly more opaque */
-    z-index: 9999;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.slider img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+.slider .slides {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: opacity 0.5s ease, visibility 0.5s ease;
+    transition: transform 0.5s ease-in-out;
+}
+.slider .slide {
+    min-width: 100%;
+    box-sizing: border-box;
+}
+.slider-nav {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+}
+.slider-nav button {
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+}
+.slider-nav button:hover {
+    background: rgba(0, 0, 0, 0.8);
 }
 
-#loader.hidden {
-    opacity: 0;
-    visibility: hidden;
-}
-
-#loader img {
-    width: 80px;
-    height: 80px;
-    animation: spin 1s linear infinite;
-}
-
-/* Keyframes for spinning effect */
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-/* Responsive Design */
+/* Responsive Styles */
 @media (max-width: 768px) {
-    .divs {
-        grid-template-columns: 1fr;
-        padding: 0 20px;
+    .container {
+        flex-direction: column;
     }
-
-    .related-posts {
-        grid-template-columns: 1fr;
+    .blog-section {
+        margin-right: 0;
+        margin-bottom: 20px;
     }
-
+    aside {
+        margin-top: 20px;
+    }
     .hero-section h1 {
-        font-size: 36px;
+        font-size: 2.5rem;
     }
-
     .hero-section p {
-        font-size: 18px;
+        font-size: 1.2rem;
     }
 }
 
-@media (max-width: 576px) {
-    .navbar-nav .nav-link {
-        margin-right: 10px;
+@media (max-width: 480px) {
+    .hero-section h1 {
+        font-size: 1.8rem;
     }
-
-    .cards img {
-        height: 150px;
+    .hero-section p {
+        font-size: 1rem;
     }
-
-    .card-body {
-        padding: 15px;
+    .btn {
+        padding: 8px 16px;
+        font-size: 0.8rem;
     }
-
-    .related-post img {
-        height: 120px;
+    .related-posts-title {
+        font-size: 1.2rem;
     }
-
-    footer {
-        padding: 20px 0;
+    .slider img {
+        height: 200px;
     }
 }
 
-    </style>
+
+    #loader {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.9);
+        z-index: 9999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+
+    #loader.hidden {
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    #loader img {
+        width: 80px;
+        height: 80px;
+        animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    .slide-in {
+        animation: slideIn 1s ease-out;
+    }
+
+    @keyframes slideIn {
+        from {
+            transform: translateY(-20px);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    .advertisement {
+        background-color: #e0f2f1;
+        padding: 20px;
+        border-radius: 8px;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    @media (max-width: 768px) {
+        .content-grid {
+            grid-template-columns: 1fr;
+            padding: 0 20px;
+        }
+
+        .related-posts {
+            grid-template-columns: 1fr;
+        }
+
+        .hero-section h1 {
+            font-size: 36px;
+        }
+
+        .hero-section p {
+            font-size: 18px;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .navbar-nav .nav-link {
+            margin-right: 10px;
+        }
+
+        .cards img {
+            height: 150px;
+        }
+
+        .card-body {
+            padding: 15px;
+        }
+
+        .related-post img {
+            height: 120px;
+        }
+
+        footer {
+            padding: 20px 0;
+        }
+    }
+</style>
+
 </head>
 <body>
 
@@ -291,74 +422,88 @@ footer a:hover {
 
 <!-- Hero Section -->
 <div class="hero-section">
-    <h1>Welcome to LYLISPHERE</h1>
-    <p>Explore beautiful stories, tips, and guides on our blog</p>
+    <h1 class="slide-in">Welcome to LYLISPHERE</h1>
+    <p class="slide-in">Explore beautiful stories, tips, and guides on our blog</p>
 </div>
 
-<!-- Blog Section -->
-<div class="container blog-section">
-    <div class="row">
-        <!-- Blog Posts Column -->
-        <div class="col-md-8">
-            <h2 class="blog-title">Latest Posts</h2>
-            <div class="divs">
-                <?php foreach ($posts as $post): ?>
-                <div class="card cards">
+<!-- Container for Blog and Sidebar -->
+<div class="container">
+    <!-- Blog Section -->
+    <div class="blog-section">
+        <div class="content-grid">
+            <?php foreach ($posts as $post): ?>
+                <div class="cards">
                     <img src="<?=$post['img']?>" alt="Post Image" />
                     <div class="card-body">
-                        <h4 class="card-title"><?=$post['title']?></h4>
-                        <p class="card-text"><?=substr(html_entity_decode($post['body']),0,200) . '...'?></p>
-                        <a href="blog-details?title=<?=str_replace(' ', '_',$post['title'])?>" class="btn btn-primary">Read more</a>
+                        <h4><?=htmlspecialchars($post['title'])?></h4>
+                        <p><?= htmlspecialchars(substr($post['body'], 0, 200) . (strlen($post['body']) > 200 ? '...' : '')) ?></p>
 
-                        <!-- Like and Comment Section -->
-                        <div class="like-comment-section mt-3">
-                            <form method="POST">
-                                <input type="hidden" name="post_id" value="<?=$post['id']?>">
-                                <?php if ($post['user_liked']): ?>
-                                    <button type="submit" name="like_post" class="btn btn-outline-danger">Unlike</button>
-                                <?php else: ?>
-                                    <button type="submit" name="like_post" class="btn btn-outline-primary">Like</button>
-                                <?php endif; ?>
-                            </form>
-                            <span class="ms-2"><?=$post['like_count']?> Likes</span>
-                        </div>
+                        <p>Author: <?=htmlspecialchars($post['username'])?></p>
+                        <a href="blog-details?title=<?=str_replace(' ', ' ',$post['title'])?>" class="btn btn-primary mb-3">Read more</a>
+
+                        <!-- Like Section -->
+                        <form method="POST" action="">
+                            <input type="hidden" name="post_id" value="<?=$post['id']?>">
+                            <button type="submit" name="like_post" class="btn <?=($post['user_liked']) ? 'btn-danger' : 'btn-outline-primary'?>">
+                                <?=($post['user_liked']) ? 'Unlike' : 'Like'?> 
+                            </button>
+                        </form>
 
                         <!-- Comments Section -->
-                        <div class="mt-3">
-                            <h5>Comments</h5>
-                            <?php if (!empty($post['comments'])): ?>
-                                <ul class="list-unstyled">
-                                    <?php foreach ($post['comments'] as $comment): ?>
-                                        <li>
-                                            <strong><?=$comment['username']?>:</strong>
-                                            <p><?=$comment['comment']?></p>
-                                        </li>
-                                    <?php endforeach; ?>
-                                </ul>
-                            <?php else: ?>
-                                <p>No comments yet.</p>
-                            <?php endif; ?>
-                        </div>
+                        <h5>Comments (<?=count($post['comments'])?>)</h5>
+                        <span>Likes (<?=$post['like_count']?>)</span>
+                        <?php if (!empty($post['comments'])): ?>
+                            <ul>
+                                <?php foreach ($post['comments'] as $comment): ?>
+                                    <li>
+                                        <strong><?=htmlspecialchars($comment['username'])?>:</strong>
+                                        <p><?=htmlspecialchars($comment['comment'])?></p>
+                                        <small><?= htmlspecialchars(date('F j, Y', strtotime($comment['created_at']))) ?></small>
+                                    </li>
+                                <?php endforeach; ?>
+                            </ul>
+                        <?php else: ?>
+                            <p>No comments yet.</p>
+                        <?php endif; ?>
+
+                        <!-- Comment Form / Login Prompt -->
+                        <?php if ($isLoggedIn): ?>
+                            <form method="POST" action="">
+                                <div class="mb-3">
+                                    <label for="comment" class="form-label">Add a Comment</label>
+                                    <textarea class="form-control" id="comment" name="comment" rows="3" required></textarea>
+                                </div>
+                                <input type="hidden" name="post_id" value="<?=$post['id']?>">
+                                <button type="submit" name="add_comment" class="btn btn-primary">Submit Comment</button>
+                            </form>
+                        <?php else: ?>
+                            <p>Please <a href="login.php">login</a> to add a comment.</p>
+                        <?php endif; ?>
                     </div>
                 </div>
-                <?php endforeach; ?>
-            </div>
+                <hr>
+            <?php endforeach; ?>
         </div>
+    </div>
 
-        <!-- Sidebar Column -->
-        <div class="col-md-4">
-            <!-- Categories Section -->
+    <!-- Sidebar Column -->
+    <aside>
+        <div class="sidebar">
+            <div class="advertisement">
+                <h4>Advertisement</h4>
+                <p>Place your ad here!</p>
+                <img src="https://via.placeholder.com/300x250" alt="Advertisement">
+            </div>
+
             <div class="sidebar">
                 <h4>Categories</h4>
                 <ul>
-                    <li><a href="#">Finance</a></li>
-                    <li><a href="#">Tech</a></li>
-                    <li><a href="#">Lifestyle</a></li>
-                    <li><a href="#">Health</a></li>
+                    <?php foreach($cat as $c):?>
+                        <li><a href=""><?=$c?></a></li>
+                    <?php endforeach; ?>
                 </ul>
             </div>
 
-            <!-- Latest Posts Section -->
             <div class="sidebar">
                 <h4>Latest Posts</h4>
                 <ul>
@@ -369,25 +514,136 @@ footer a:hover {
                 </ul>
             </div>
         </div>
-    </div>
-</div>
 
-<!-- Related Posts Section -->
-<div class="related-posts-section">
-    <h2 class="related-posts-title">Related Post</h2>
-    <div class="container">
-        <div class="related-post">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSW56loU4cr3HNSp4tb2mOEJBgEKRwMeYUqJDsmkWsMvgGin1JY6LyZR4MyScVv1i3ASas&usqp=CAU" alt="Related Post Image" />
-            <h5>Exploring Tech Innovations</h5>
-            <a href="blog-details?title=Exploring_Tech_Innovations" class="btn btn-outline-primary">Read more</a>
+        <div class="related-posts-section">
+            <h2 class="related-posts-title">Related Posts</h2>
+            <div class="related-posts">
+                <div class="related-post">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSW56loU4cr3HNSp4tb2mOEJBgEKRwMeYUqJDsmkWsMvgGin1JY6LyZR4MyScVv1i3ASas&usqp=CAU" alt="Related Post Image" />
+                    <h5>Exploring Tech Innovations</h5>
+                    <a href="blog-details?title=Exploring_Tech_Innovations" class="btn btn-outline-primary">Read more</a>
+                </div>
+            </div>
         </div>
-    </div>
+        <div class="related-posts-section">
+            <h2 class="related-posts-title">Related Posts</h2>
+            <div class="related-posts">
+                <div class="related-post">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSW56loU4cr3HNSp4tb2mOEJBgEKRwMeYUqJDsmkWsMvgGin1JY6LyZR4MyScVv1i3ASas&usqp=CAU" alt="Related Post Image" />
+                    <h5>Exploring Tech Innovations</h5>
+                    <a href="blog-details?title=Exploring_Tech_Innovations" class="btn btn-outline-primary">Read more</a>
+                </div>
+            </div>
+        </div>
+        <div class="related-posts-section">
+            <h2 class="related-posts-title">Related Posts</h2>
+            <div class="related-posts">
+                <div class="related-post">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSW56loU4cr3HNSp4tb2mOEJBgEKRwMeYUqJDsmkWsMvgGin1JY6LyZR4MyScVv1i3ASas&usqp=CAU" alt="Related Post Image" />
+                    <h5>Exploring Tech Innovations</h5>
+                    <a href="blog-details?title=Exploring_Tech_Innovations" class="btn btn-outline-primary">Read more</a>
+                </div>
+            </div>
+        </div>
+        <div class="related-posts-section">
+            <h2 class="related-posts-title">Related Posts</h2>
+            <div class="related-posts">
+                <div class="related-post">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSW56loU4cr3HNSp4tb2mOEJBgEKRwMeYUqJDsmkWsMvgGin1JY6LyZR4MyScVv1i3ASas&usqp=CAU" alt="Related Post Image" />
+                    <h5>Exploring Tech Innovations</h5>
+                    <a href="blog-details?title=Exploring_Tech_Innovations" class="btn btn-outline-primary">Read more</a>
+                </div>
+            </div>
+        </div>
+        <div class="related-posts-section">
+            <h2 class="related-posts-title">Related Posts</h2>
+            <div class="related-posts">
+                <div class="related-post">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSW56loU4cr3HNSp4tb2mOEJBgEKRwMeYUqJDsmkWsMvgGin1JY6LyZR4MyScVv1i3ASas&usqp=CAU" alt="Related Post Image" />
+                    <h5>Exploring Tech Innovations</h5>
+                    <a href="blog-details?title=Exploring_Tech_Innovations" class="btn btn-outline-primary">Read more</a>
+                </div>
+            </div>
+        </div>
+        <div class="related-posts-section">
+            <h2 class="related-posts-title">Related Posts</h2>
+            <div class="related-posts">
+                <div class="related-post">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSW56loU4cr3HNSp4tb2mOEJBgEKRwMeYUqJDsmkWsMvgGin1JY6LyZR4MyScVv1i3ASas&usqp=CAU" alt="Related Post Image" />
+                    <h5>Exploring Tech Innovations</h5>
+                    <a href="blog-details?title=Exploring_Tech_Innovations" class="btn btn-outline-primary">Read more</a>
+                </div>
+            </div>
+        </div>
+        <div class="related-posts-section">
+            <h2 class="related-posts-title">Related Posts</h2>
+            <div class="related-posts">
+                <div class="related-post">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSW56loU4cr3HNSp4tb2mOEJBgEKRwMeYUqJDsmkWsMvgGin1JY6LyZR4MyScVv1i3ASas&usqp=CAU" alt="Related Post Image" />
+                    <h5>Exploring Tech Innovations</h5>
+                    <a href="blog-details?title=Exploring_Tech_Innovations" class="btn btn-outline-primary">Read more</a>
+                </div>
+            </div>
+        </div>
+        <div class="related-posts-section">
+            <h2 class="related-posts-title">Related Posts</h2>
+            <div class="related-posts">
+                <div class="related-post">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSW56loU4cr3HNSp4tb2mOEJBgEKRwMeYUqJDsmkWsMvgGin1JY6LyZR4MyScVv1i3ASas&usqp=CAU" alt="Related Post Image" />
+                    <h5>Exploring Tech Innovations</h5>
+                    <a href="blog-details?title=Exploring_Tech_Innovations" class="btn btn-outline-primary">Read more</a>
+                </div>
+            </div>
+        </div>
+        <div class="related-posts-section">
+            <h2 class="related-posts-title">Related Posts</h2>
+            <div class="related-posts">
+                <div class="related-post">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSW56loU4cr3HNSp4tb2mOEJBgEKRwMeYUqJDsmkWsMvgGin1JY6LyZR4MyScVv1i3ASas&usqp=CAU" alt="Related Post Image" />
+                    <h5>Exploring Tech Innovations</h5>
+                    <a href="blog-details?title=Exploring_Tech_Innovations" class="btn btn-outline-primary">Read more</a>
+                </div>
+            </div>
+        </div>
+        <div class="related-posts-section">
+            <h2 class="related-posts-title">Related Posts</h2>
+            <div class="related-posts">
+                <div class="related-post">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSW56loU4cr3HNSp4tb2mOEJBgEKRwMeYUqJDsmkWsMvgGin1JY6LyZR4MyScVv1i3ASas&usqp=CAU" alt="Related Post Image" />
+                    <h5>Exploring Tech Innovations</h5>
+                    <a href="blog-details?title=Exploring_Tech_Innovations" class="btn btn-outline-primary">Read more</a>
+                </div>
+            </div>
+        </div>
+        <div class="related-posts-section">
+            <h2 class="related-posts-title">Related Posts</h2>
+            <div class="related-posts">
+                <div class="related-post">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSW56loU4cr3HNSp4tb2mOEJBgEKRwMeYUqJDsmkWsMvgGin1JY6LyZR4MyScVv1i3ASas&usqp=CAU" alt="Related Post Image" />
+                    <h5>Exploring Tech Innovations</h5>
+                    <a href="blog-details?title=Exploring_Tech_Innovations" class="btn btn-outline-primary">Read more</a>
+                </div>
+            </div>
+        </div>
+        <div class="related-posts-section">
+            <h2 class="related-posts-title">Related Posts</h2>
+            <div class="related-posts">
+                <div class="related-post">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSW56loU4cr3HNSp4tb2mOEJBgEKRwMeYUqJDsmkWsMvgGin1JY6LyZR4MyScVv1i3ASas&usqp=CAU" alt="Related Post Image" />
+                    <h5>Exploring Tech Innovations</h5>
+                    <a href="blog-details?title=Exploring_Tech_Innovations" class="btn btn-outline-primary">Read more</a>
+                </div>
+            </div>
+        </div>
+     
+       
+        
+    </aside>
 </div>
-
 
 <!-- Footer -->
 <footer>
-    <div class="container">
+    <div class="container cont">
         <p>&copy; 2024 LYLISPHERE Blog. All rights reserved.</p>
         <p>
             <a href="#">Privacy Policy</a> |
@@ -406,6 +662,8 @@ footer a:hover {
     });
 </script>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 </body>
 </html>
